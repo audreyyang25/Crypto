@@ -1,0 +1,5 @@
+If current block miner’s address ends in b, allow them to burn any amount, as long as that amount is less than or equal to what they have in their account
+
+The miner who mines the first block of every leap year will be minted double the amount they have currently in their account
+
+If the current block timestamp contains 4:20 in it, give the current block miner 1.5 times the reward
