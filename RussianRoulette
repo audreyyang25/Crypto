@@ -1,0 +1,47 @@
+players: public (DynArray [address, 100])
+losers: public (DynArray [address, 100])
+odds: public (uint256)
+playersTurn: public (uint256)
+creator: public (address)
+
+@external
+def __init__ (_contractCreator: address):
+    self.creator = _contractCreator
+    self.playersTurn = 0
+
+@external
+def setOdds (_inputOdds: uint256):
+    assert msg.sender == self.creator
+    self.odds = _inputOdds
+
+@external
+def addPlayer (_player: address):
+    for i in self.losers:
+        assert not i == _player
+    for j in self.players:
+        assert not j == _player
+    self.players.append (_player)
+
+@internal
+def lose (_player: address):
+    for i in self.players:
+        self.players.pop()
+    self.losers.append (_player)
+
+@internal
+def random () -> uint256:
+    return block.number%self.odds
+
+@external
+def play ():
+    num: uint256 = self.random ()
+    player: address = self.players [self.playersTurn]
+    if num == 1:
+        self.lose (player)
+    else:
+        self.playersTurn+=1
+
+@external
+def isALoser (_person: address):
+    for i in self.losers:
+        assert i == _person
