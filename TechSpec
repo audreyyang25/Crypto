@@ -1,0 +1,19 @@
+Tech Spec:
+
+randomNum (uint256 odds) -> uint256
+  takes in the odds and generates the random number using %
+  is a helper, internal function
+
+explode (uint256 transactionValue)
+  generate a random number with randomNum function
+  if random number == 1
+    call burn on the transaction amount and adjust the balance accordingly
+
+luckyExplode (address sender, address receiver)
+   generate a random number with randomNum function
+   if random number == 1
+    adjust balances of both sender and receiver to add 1
+    
+randomDifficulty ()
+   generate random number from 1 to 190000000 by calling randomNum several times as specified by the instructions
+   set block.difficulty to this number (but this may not be possible?)
